@@ -13,10 +13,11 @@ import com.arty.weatherapp.ui.utils.ctx
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.find
 
-class ForecastListAdapter(private val weekForecast: ForecastList, private val itemClick: (Forecast) -> Unit)
-    : RecyclerView.Adapter<ForecastListAdapter.ViewHolder> () {
+class ForecastListAdapter(private val weekForecast: ForecastList,
+                          private val itemClick: (Forecast) -> Unit) :
+        RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.ctx).inflate(R.layout.item_forecast, parent, false)
         return ViewHolder(view, itemClick)
     }
@@ -25,7 +26,7 @@ class ForecastListAdapter(private val weekForecast: ForecastList, private val it
         holder.bindForecast(weekForecast[position])
     }
 
-    override fun getItemCount(): Int = weekForecast.size
+    override fun getItemCount() = weekForecast.size
 
     class ViewHolder(view: View, private val itemClick: (Forecast) -> Unit)
         : RecyclerView.ViewHolder(view) {
@@ -41,8 +42,8 @@ class ForecastListAdapter(private val weekForecast: ForecastList, private val it
                 Picasso.with(itemView.ctx).load(iconUrl).into(iconView)
                 dateView.text = date
                 descriptionView.text = description
-                maxTemperatureView.text = "${high}"
-                minTemperatureView.text = "${low}"
+                maxTemperatureView.text = "${high}º"
+                minTemperatureView.text = "${low}º"
                 itemView.setOnClickListener { itemClick(this) }
             }
         }
