@@ -7,9 +7,8 @@ import android.support.v7.widget.RecyclerView
 import com.arty.weatherapp.ui.adapters.ForecastListAdapter
 import com.arty.weatherapp.R
 import com.arty.weatherapp.domain.commands.RequestForecastCommand
-import com.arty.weatherapp.domain.model.Forecast
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 
@@ -19,7 +18,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val forecastList = find<RecyclerView>(R.id.forecast_list)
         forecastList.layoutManager = LinearLayoutManager(this)
 
         doAsync {
