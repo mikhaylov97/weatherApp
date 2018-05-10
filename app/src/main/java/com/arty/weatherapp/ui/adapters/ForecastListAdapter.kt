@@ -4,15 +4,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.arty.weatherapp.R
 import com.arty.weatherapp.domain.model.Forecast
 import com.arty.weatherapp.domain.model.ForecastList
 import com.arty.weatherapp.ui.utils.ctx
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_forecast.view.*
-import org.jetbrains.anko.find
 
 class ForecastListAdapter(private val weekForecast: ForecastList,
                           private val itemClick: (Forecast) -> Unit) :
