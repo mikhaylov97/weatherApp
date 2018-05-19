@@ -1,7 +1,7 @@
 package com.arty.weatherapp.ui
 
 import android.app.Application
-import com.arty.weatherapp.ui.utils.DelegatesExt
+import com.arty.weatherapp.extensions.DelegatesExt
 
 class App : Application() {
 

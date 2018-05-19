@@ -1,7 +1,7 @@
 package com.arty.weatherapp.domain.mappers
 
-import com.arty.weatherapp.data.Forecast
-import com.arty.weatherapp.data.ForecastResult
+import com.arty.weatherapp.data.server.Forecast
+import com.arty.weatherapp.data.server.ForecastResult
 import com.arty.weatherapp.domain.model.ForecastList
 import java.text.DateFormat
 import java.util.*
@@ -10,8 +10,9 @@ import com.arty.weatherapp.domain.model.Forecast as ForecastModel
 
 class ForecastDataMapper {
 
-    fun convertFromDataModel(forecast: ForecastResult): ForecastList =
-            ForecastList(forecast.city.name, forecast.city.country, convertForecastListToDomain(forecast.list))
+    fun convertFromDataModel(zipCode: Long, forecast: ForecastResult) = with(forecast) {
+        ForecastList(zipCode, city.name, city.country, convertForecastListToDomain(list))
+    }
 
     private fun convertForecastListToDomain(list: List<Forecast>): List<ForecastModel> {
         return list.mapIndexed { i, forecast ->
@@ -20,14 +21,9 @@ class ForecastDataMapper {
         }
     }
 
-    private fun convertForecastItemToDomain(forecast: Forecast): ForecastModel {
-        return ForecastModel(convertDate(forecast.dt), forecast.weather[0].description,
-                forecast.temp.max.toInt(), forecast.temp.min.toInt(), generateIconUrl(forecast.weather[0].icon))
-    }
-
-    private fun convertDate(date: Long): String {
-        val df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
-        return df.format(date)
+    private fun convertForecastItemToDomain(forecast: Forecast) = with(forecast) {
+        ForecastModel(dt, weather[0].description, temp.max.toInt(), temp.min.toInt(),
+                generateIconUrl(weather[0].icon))
     }
 
     private fun generateIconUrl(iconCode: String) = "http://openweathermap.org/img/w/$iconCode.png"

@@ -3,7 +3,6 @@ package com.arty.weatherapp.ui.activities
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import com.arty.weatherapp.ui.adapters.ForecastListAdapter
 import com.arty.weatherapp.R
 import com.arty.weatherapp.domain.commands.RequestForecastCommand
@@ -21,9 +20,9 @@ class MainActivity : AppCompatActivity() {
         forecastList.layoutManager = LinearLayoutManager(this)
 
         doAsync {
-            val result = RequestForecastCommand("94043").execute()
+            val result = RequestForecastCommand(94043).execute()
             uiThread {
-                val adapter = ForecastListAdapter(result) { toast(it.date) }
+                val adapter = ForecastListAdapter(result, { toast(it.description) })
                 forecastList.adapter = adapter
             }
         }

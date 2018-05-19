@@ -1,4 +1,4 @@
-package com.arty.weatherapp.ui.utils
+package com.arty.weatherapp.extensions
 
 import kotlin.reflect.KProperty
 
