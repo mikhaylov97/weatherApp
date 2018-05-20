@@ -1,5 +1,6 @@
 package com.arty.weatherapp.data.db
 
+import com.arty.weatherapp.domain.datasource.ForecastDataSource
 import com.arty.weatherapp.domain.model.ForecastList
 import com.arty.weatherapp.extensions.clear
 import com.arty.weatherapp.extensions.parseList
@@ -9,9 +10,9 @@ import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 
 class ForecastDb(private val forecastDbHelper: ForecastDbHelper = ForecastDbHelper.instance,
-                 private val dataMapper: DbDataMapper = DbDataMapper()) {
+                 private val dataMapper: DbDataMapper = DbDataMapper()) : ForecastDataSource {
 
-    fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
+    override fun requestForecastByZipCode(zipCode: Long, date: Long) = forecastDbHelper.use {
 
         val dailyRequest = "${DayForecastTable.CITY_ID} = ? AND ${DayForecastTable.DATE} >= ?"
         val dailyForecast = select(DayForecastTable.NAME)
